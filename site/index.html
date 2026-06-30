@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fef7fb" />
+    <meta name="description" content="A private one-month anniversary surprise." />
+    <title>Happy One Month</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="assets/fonts/press-start-2p.css" />
+  </head>
+  <body>
+    <main class="site-shell" aria-label="One month anniversary surprise experience">
+      <p class="sr-only" id="scene-status" aria-live="polite" aria-atomic="true"></p>
+
+      <section id="intro" class="scene is-active" data-scene="intro" aria-labelledby="intro-title">
+        <div class="scene-bg" aria-hidden="true">
+          <img src="assets/gengar-bg.png" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center bottom;display:block;">
+        </div>
+
+        <div class="scene-card intro-card">
+          <h1 id="intro-title" class="hero-title">ONE MONTH<br/>TOGETHER</h1>
+          <button
+            id="entry-button"
+            class="entry-button"
+            type="button"
+            data-action="advance-scene"
+            aria-describedby="intro-copy"
+          >
+            TAP? ;)
+          </button>
+          <div id="gengar-follower" class="gengar-follower" aria-hidden="true">
+            <div class="gengar-inner">
+              <img
+                src="assets/gengar-sprite.gif"
+                alt=""
+                width="96"
+                height="96"
+                class="gengar-sprite"
+                draggable="false"
+              />
+            </div>
+          </div>
+        </div>
+        <div id="intro-copy" class="pokemon-textbox intro-textbox">
+          <p class="intro-encounter-text"><span class="intro-typewriter" data-text="A wild girlfriend has appeared! uWu"></span><span class="pokemon-cursor" aria-hidden="true">&#9660;</span></p>
+        </div>
+      </section>
+
+      <section id="reveal" class="scene" data-scene="reveal" aria-labelledby="reveal-title" aria-hidden="true">
+        <div class="scene-bg" aria-hidden="true">
+          <img src="assets/cafe-bg.png" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center bottom;display:block;">
+        </div>
+
+        <div class="scene-card reveal-card">
+          <div class="reveal-stage">
+            <p class="eyebrow">You found a wild Boyfriend.</p>
+            <div class="surprise-illustration" aria-label="Snorlax">
+              <div class="snorlax-figure" aria-hidden="true">
+                <img
+                  class="snorlax-sprite"
+                  src="assets/snorlax-sprite.gif"
+                  alt=""
+                  width="64"
+                  height="64"
+                />
+              </div>
+            </div>
+            <div class="pokemon-textbox">
+              <h2 id="reveal-title" class="reveal-title"><span class="typewriter-text" data-text="He has something for you!"></span><span class="pokemon-cursor" aria-hidden="true">▼</span></h2>
+            </div>
+            <div class="battle-actions">
+              <div class="battle-prompt-box">
+                <span class="prompt-typewriter" data-text="What do you do?"></span>
+              </div>
+              <div class="battle-menu-box">
+                <button class="battle-option" type="button" data-action="reveal-letter">REVEAL</button>
+                <button class="battle-option" type="button" data-action="return-intro">RETURN</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="letter" class="scene" role="region" data-scene="letter" aria-labelledby="letter-title" aria-hidden="true">
+        <div class="scene-bg" aria-hidden="true">
+          <img src="assets/mew-bg.png" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center bottom;display:block;">
+          <!-- Animated falling petals -->
+          <span class="bg-petal" style="left:8%;animation-duration:9s;animation-delay:0s"></span>
+          <span class="bg-petal" style="left:18%;animation-duration:11s;animation-delay:2s"></span>
+          <span class="bg-petal" style="left:30%;animation-duration:8s;animation-delay:4s"></span>
+          <span class="bg-petal" style="left:44%;animation-duration:13s;animation-delay:1s"></span>
+          <span class="bg-petal" style="left:58%;animation-duration:9.5s;animation-delay:3s"></span>
+          <span class="bg-petal" style="left:70%;animation-duration:10s;animation-delay:0.5s"></span>
+          <span class="bg-petal" style="left:82%;animation-duration:12s;animation-delay:5s"></span>
+          <span class="bg-petal" style="left:92%;animation-duration:8.5s;animation-delay:2.5s"></span>
+          <span class="bg-petal" style="left:14%;animation-duration:10.5s;animation-delay:6s"></span>
+          <span class="bg-petal" style="left:52%;animation-duration:7.5s;animation-delay:3.5s"></span>
+        </div>
+        <div class="scene-card letter-card">
+          <div class="letter-stage">
+            <h2 id="letter-title" class="letter-title">I CHOOSE YOU!</h2>
+            <div class="letter-paper" role="article" aria-label="Letter from your partner">
+              <div class="letter-content">
+                <!-- Page 1 -->
+                <div class="letter-page is-active" data-page="0">
+                  <p>To my favorite Chinese,</p>
+                  <p>Happy First month together, babygirl &lt;3</p>
+                </div>
+                <!-- Page 2 -->
+                <div class="letter-page" data-page="1">
+                  <p>No words can describe how happy I am to be your boyfriend. In every moment we share, every laugh we have, and every chance we get to spend time together, I always feel light and at peace. Every day, I find myself yearning and eagerly waiting to see your ethereal beauty, hear your enchanting voice, smell your irresistible scent, taste your ambrosial lips, touch your exquisite skin, and feel your melting warmth. You are the best part of my day. Every text, every notification, and even the littlest time I can spend with you, there is nothing else I look forward to the most (toes curled up and shi). Your presence is just entirely ineffable—you have this way of making forever feel short.</p>
+                </div>
+                <!-- Page 3 -->
+                <div class="letter-page" data-page="2">
+                  <p>Please forgive and bear with this dumb person you ended up with—I am just a stupid boy in love who only wants to be there for you, hold you, embrace you, and make you happy. I love getting to know you more and experiencing ALL of YOU in every angle—your sweetness, your sincerity, your exhaustion, your naivety, your care, your brilliance, your questionable curiosity, your vulnerability, your excitement, and, yes, even your frustration. Through every hill we encounter, my passion remains unwavering and ever-growing. I fall more in love with every version of you that I get to meet.</p>
+                </div>
+                <!-- Page 4 -->
+                <div class="letter-page" data-page="3">
+                  <p>I want to let you know that, whenever you miss me, just know I miss you more. And, for every moment you miss me more, I promise you—I miss you the most. &lt;3</p>
+                  <p>No matter how big we make our garden to be, you will always be my favorite flower, Iris.</p>
+                  <p>Here’s to one of many months and years together. Thank you for making my life brighter by simply being in it.</p>
+                  <p class="signature" data-text="Always craving your lo mein,&#10;Your favorite Jungle Asian">Always craving your lo mein,<br />Your favorite Jungle Asian</p>
+                </div>
+              </div>
+              <nav class="letter-page-nav" aria-label="Letter pages" aria-hidden="true">
+                <button type="button" class="letter-nav-btn letter-nav-prev" disabled>&#9664;</button>
+                <span class="letter-page-dots">
+                  <span class="letter-page-dot is-active"></span>
+                  <span class="letter-page-dot"></span>
+                  <span class="letter-page-dot"></span>
+                  <span class="letter-page-dot"></span>
+                </span>
+                <button type="button" class="letter-nav-btn letter-nav-next" disabled>&#9654;</button>
+              </nav>
+              <span class="pokemon-cursor letter-cursor" aria-hidden="true">&#9660;</span>
+            </div>
+            <div class="petals" aria-hidden="true">
+              <span class="petal petal--rose"></span>
+              <span class="petal petal--iris"></span>
+              <span class="petal petal--rose"></span>
+              <span class="petal petal--iris"></span>
+              <span class="petal petal--rose"></span>
+              <span class="petal petal--iris"></span>
+              <span class="petal petal--rose"></span>
+              <span class="petal petal--iris"></span>
+              <span class="petal petal--rose"></span>
+              <span class="petal petal--iris"></span>
+              <span class="petal petal--rose"></span>
+              <span class="petal petal--iris"></span>
+            </div>
+            <div style="text-align:center; margin-top: 1.5rem; position: relative; z-index: 1;">
+              <button class="pokeball-btn" type="button" aria-label="Close the Love Ball and return to the start">
+                <img
+                  class="pokeball-sprite"
+                  src="assets/love-ball.png"
+                  alt=""
+                  width="120"
+                  height="120"
+                  aria-hidden="true"
+                />
+                <span class="sr-only">Back to the front page</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Mew autonomous flier — outside all stacking contexts so position:fixed works -->
+    <div id="mew-follower" class="mew-figure" aria-hidden="true">
+      <div class="mew-inner">
+        <img class="mew-sprite"
+          src="assets/mew-sprite.gif"
+          alt="" width="96" height="96" />
+      </div>
+    </div>
+
+    <!-- BL Secret Overlay — shown after accepting the Pokémon item popup -->
+    <div id="bl-overlay" class="bl-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Secret Garden">
+      <div class="bl-dark-scrim" aria-hidden="true"></div>
+      <!-- Manga panel background -->
+      <div class="bl-panel-bg" aria-hidden="true">
+        <div class="bl-pg-grid">
+          <div class="bl-pg-panel bl-pg-main">
+            <img src="assets/bl-okah.png" alt="">
+            <div class="bl-pg-flare"></div>
+          </div>
+          <div class="bl-pg-panel bl-pg-door">
+            <img src="assets/bl-door.jpeg" alt="">
+            <div class="bl-pg-flare"></div>
+          </div>
+          <div class="bl-pg-panel bl-pg-kiss">
+            <img src="assets/bl-kiss.jpeg" alt="">
+            <div class="bl-pg-flare"></div>
+          </div>
+          <div class="bl-pg-panel bl-pg-glow">
+            <img src="assets/bl-fireworks.webp" alt="">
+            <div class="bl-pg-flare"></div>
+          </div>
+        </div>
+        <div class="bl-pg-sparkles">
+          <svg class="bl-pg-sparkle" width="18" height="18" viewBox="0 0 20 20"><path d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5Z" fill="#f9b8cf"/></svg>
+          <svg class="bl-pg-sparkle" width="14" height="14" viewBox="0 0 20 20"><path d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5Z" fill="#fad0e4"/></svg>
+          <svg class="bl-pg-sparkle" width="10" height="10" viewBox="0 0 20 20"><path d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5Z" fill="#ffffff"/></svg>
+          <svg class="bl-pg-sparkle" width="16" height="16" viewBox="0 0 20 20"><path d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5Z" fill="#f9b8cf"/></svg>
+          <svg class="bl-pg-sparkle" width="12" height="12" viewBox="0 0 20 20"><path d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5Z" fill="#fce8ef"/></svg>
+          <svg class="bl-pg-sparkle" width="8"  height="8"  viewBox="0 0 20 20"><path d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5Z" fill="#f4a7c0"/></svg>
+          <svg class="bl-pg-sparkle" width="10" height="10" viewBox="0 0 20 20"><path d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5Z" fill="#fce8ef"/></svg>
+          <svg class="bl-pg-sparkle" width="14" height="14" viewBox="0 0 32 32"><path d="M16 28s-14-9-14-18a7 7 0 0 1 14 0 7 7 0 0 1 14 0c0 9-14 18-14 18z" fill="#f9b8cf"/></svg>
+          <svg class="bl-pg-sparkle" width="10" height="10" viewBox="0 0 32 32"><path d="M16 28s-14-9-14-18a7 7 0 0 1 14 0 7 7 0 0 1 14 0c0 9-14 18-14 18z" fill="#fad0e4"/></svg>
+          <svg class="bl-pg-sparkle" width="12" height="12" viewBox="0 0 32 32"><path d="M16 28s-14-9-14-18a7 7 0 0 1 14 0 7 7 0 0 1 14 0c0 9-14 18-14 18z" fill="#f4a7c0"/></svg>
+          <svg class="bl-pg-sparkle" width="8"  height="8"  viewBox="0 0 20 20"><path d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5Z" fill="#ffffff"/></svg>
+          <svg class="bl-pg-sparkle" width="16" height="16" viewBox="0 0 32 32"><path d="M16 28s-14-9-14-18a7 7 0 0 1 14 0 7 7 0 0 1 14 0c0 9-14 18-14 18z" fill="#fce8ef"/></svg>
+        </div>
+        <span class="bl-pg-corner tl" aria-hidden="true">🌸</span>
+        <span class="bl-pg-corner tr" aria-hidden="true">✦</span>
+        <span class="bl-pg-corner bl" aria-hidden="true">✦</span>
+        <span class="bl-pg-corner br" aria-hidden="true">🌸</span>
+      </div>
+      <!-- NI panel — B&W layer, fades in as ghost grows -->
+      <div class="bl-ni-panel-bg" aria-hidden="true">
+        <div class="bl-ni-pg-grid">
+          <div class="bl-ni-panel bl-ni-p1"><img src="assets/bl-notinn1.jpeg" alt=""><div class="bl-ni-wash"></div><div class="bl-ni-flare"></div></div>
+          <div class="bl-ni-panel bl-ni-p2"><img src="assets/bl-notinn2.jpeg" alt=""><div class="bl-ni-wash"></div><div class="bl-ni-flare"></div></div>
+          <div class="bl-ni-panel bl-ni-p3"><img src="assets/bl-notinn3.jpeg" alt=""><div class="bl-ni-wash"></div><div class="bl-ni-flare"></div></div>
+          <div class="bl-ni-panel bl-ni-p4"><img src="assets/bl-notinn4.jpeg" alt=""><div class="bl-ni-wash"></div><div class="bl-ni-flare"></div></div>
+          <div class="bl-ni-panel bl-ni-p5"><img src="assets/bl-notinn5.jpeg" alt=""><div class="bl-ni-wash"></div><div class="bl-ni-flare"></div></div>
+          <div class="bl-ni-panel bl-ni-p6"><img src="assets/bl-notinn6.jpeg" alt=""><div class="bl-ni-wash"></div><div class="bl-ni-flare"></div></div>
+          <div class="bl-ni-panel bl-ni-p7"><img src="assets/bl-notinn7.jpeg" alt=""><div class="bl-ni-wash"></div><div class="bl-ni-flare"></div></div>
+          <div class="bl-ni-panel bl-ni-p8"><img src="assets/bl-notinn8.jpg" alt=""><div class="bl-ni-wash"></div><div class="bl-ni-flare"></div></div>
+          <div class="bl-ni-panel bl-ni-p9"><img src="assets/bl-notinn9.png.webp" alt=""><div class="bl-ni-wash"></div><div class="bl-ni-flare"></div></div>
+        </div>
+      </div>
+      <button id="bl-close" class="bl-close-btn" aria-label="Close">✕</button>
+      <div class="bl-card" role="document">
+        <div class="bl-card-header">
+          <p class="bl-sub">✦ hidden chapter ✦</p>
+          <h2 class="bl-title">Our Secret Garden</h2>
+        </div>
+        <div class="bl-ghost-center">
+          <img src="assets/ghost-sticker.png" class="bl-ghost-img" alt="" draggable="false">
+          <div class="bl-ghost-bubble">Rub me~</div>
+        </div>
+        <blockquote class="bl-quote"><cite class="bl-cite"></cite></blockquote>
+        <p class="bl-footer-deco" aria-hidden="true">🌸 💕 ✦ 💕 🌸</p>
+      </div>
+    </div>
+
+    <!-- Scrim — darkens scene behind the Pokémon popup -->
+    <div id="poke-scrim" class="poke-scrim" aria-hidden="true"></div>
+
+    <!-- Pokémon Item Popup — appears every 2 minutes -->
+    <div id="poke-popup" class="poke-popup" aria-hidden="true" role="alertdialog" aria-label="Item received">
+      <div class="poke-dialog">
+        <div class="poke-dialog-inner">
+          <div class="poke-dialog-row">
+            <span class="poke-item-icon" id="poke-item-icon" aria-hidden="true">💌</span>
+            <div class="poke-text-col">
+              <p class="poke-line poke-line1" id="poke-line1"></p>
+              <p class="poke-line poke-line2" id="poke-line2"></p>
+            </div>
+          </div>
+          <div class="poke-btn-row" id="poke-btn-row" aria-hidden="true">
+            <button class="poke-btn poke-btn-accept" id="poke-btn-accept">Accept</button>
+            <button class="poke-btn poke-btn-decline" id="poke-btn-decline">Not Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Custom ghost cursor — only shown on hover-capable devices -->
+    <div id="ghost-cursor" aria-hidden="true">
+      <img src="assets/ghost-cursor.png" alt="" width="72" height="72" draggable="false">
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

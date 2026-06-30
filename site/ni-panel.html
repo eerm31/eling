@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NI Panel</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 100%; height: 100%;
+      background: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* ─── page shell ─── */
+    .manga-page {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    /* ─── halftone screentone overlay (B&W) ─── */
+    .manga-page::before {
+      content: '';
+      position: absolute; inset: 0; z-index: 10;
+      background-image: radial-gradient(circle, rgba(0,0,0,0.07) 1px, transparent 1px);
+      background-size: 8px 8px;
+      pointer-events: none;
+    }
+
+    /* ─── vignette ─── */
+    .manga-page::after {
+      content: '';
+      position: absolute; inset: 0; z-index: 11;
+      background: radial-gradient(ellipse at center,
+        transparent 45%,
+        rgba(0,0,0,0.35) 100%
+      );
+      pointer-events: none;
+    }
+
+    /* ─── panel grid ─── */
+    .panel-grid {
+      display: grid;
+      width: 100%; height: 100%;
+      gap: 5px;
+      padding: 5px;
+      background: #111;
+      grid-template-columns: 3fr 2fr 2fr 3fr;
+      grid-template-rows:    3fr 2fr 2fr 3fr;
+      grid-template-areas:
+        "p1 p1 p2 p3"
+        "p1 p1 p4 p3"
+        "p5 p6 p7 p7"
+        "p5 p8 p9 p9";
+    }
+
+    /* ─── individual panels ─── */
+    .panel {
+      position: relative;
+      overflow: hidden;
+      background: #d0d0d0;
+      border: none;
+    }
+
+    /* ─── slot: replace <div class="slot"> with <img src="..."> ─── */
+    .slot {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      color: #777;
+      font-family: monospace;
+      font-size: 11px;
+      text-align: center;
+      pointer-events: none;
+      user-select: none;
+    }
+    .slot::before {
+      content: attr(data-n);
+      font-size: 28px;
+      font-weight: bold;
+      color: #bbb;
+      line-height: 1;
+    }
+
+    /* ─── img inside a panel (add these when you insert images) ─── */
+    .panel img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ─── grid area placement ─── */
+    .p1 { grid-area: p1; }
+    .p2 { grid-area: p2; }
+    .p3 { grid-area: p3; }
+    .p4 { grid-area: p4; }
+    .p5 { grid-area: p5; }
+    .p6 { grid-area: p6; }
+    .p7 { grid-area: p7; }
+    .p8 { grid-area: p8; }
+    .p9 { grid-area: p9; }
+
+    /* ─── diagonal panel cuts (manhwa style) ─── */
+    .p1 { clip-path: polygon(0 0, 100% 0, 100% 92%, 94% 100%, 0 100%); }
+    .p3 { clip-path: polygon(6% 0, 100% 0, 100% 100%, 0 100%, 0 6%); }
+    .p5 { clip-path: polygon(0 0, 100% 8%, 100% 100%, 0 100%); }
+    .p9 { clip-path: polygon(0 0, 100% 0, 100% 100%, 4% 100%); }
+
+    /* ─── screentone variation on select panels ─── */
+    .p2::before,
+    .p6::before,
+    .p8::before {
+      content: '';
+      position: absolute; inset: 0; z-index: 2;
+      background-image: radial-gradient(circle, rgba(0,0,0,0.12) 1px, transparent 1px);
+      background-size: 6px 6px;
+      pointer-events: none;
+    }
+
+    /* ─── speed lines on p4 ─── */
+    .p4::after {
+      content: '';
+      position: absolute; inset: 0; z-index: 2;
+      background: repeating-conic-gradient(
+        from 0deg at 50% 50%,
+        rgba(0,0,0,0.06) 0deg 1deg,
+        transparent 1deg 4deg
+      );
+      pointer-events: none;
+    }
+
+    /* ─── per-panel tone washes ─── */
+    .panel-wash {
+      position: absolute; inset: 0; z-index: 3;
+      pointer-events: none;
+    }
+    .p1  .panel-wash { background: linear-gradient(180deg, rgba(0,0,0,0.08) 0%, transparent 50%); }
+    .p3  .panel-wash { background: linear-gradient(90deg,  rgba(0,0,0,0.10) 0%, transparent 60%); }
+    .p5  .panel-wash { background: linear-gradient(0deg,   rgba(0,0,0,0.08) 0%, transparent 60%); }
+    .p7  .panel-wash { background: linear-gradient(270deg, rgba(0,0,0,0.06) 0%, transparent 60%); }
+    .p9  .panel-wash { background: linear-gradient(180deg, rgba(0,0,0,0.10) 0%, transparent 50%); }
+
+    /* ─── panel highlight inset ─── */
+    .panel-flare {
+      position: absolute; inset: 0; z-index: 4;
+      pointer-events: none;
+      box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.25);
+    }
+
+    /* ─── speed-line SVGs ─── */
+    .speed-lines {
+      position: absolute; inset: 0; z-index: 5;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="manga-page">
+  <div class="panel-grid">
+
+    <!-- ═══════════════════════════════════════════════
+         PANEL 1 — large top-left (2 cols × 2 rows)
+         Replace the .slot div with:
+           <img src="your-image.jpg" alt="" style="object-position: center 30%;">
+    ═══════════════════════════════════════════════ -->
+    <div class="panel p1">
+      <div class="slot" data-n="1">photo 1</div>
+      <img src="assets/bl-notinn1.jpeg" alt=""/>
+      <div class="panel-wash"></div>
+      <div class="panel-flare"></div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         PANEL 2 — small top-center
+    ═══════════════════════════════════════════════ -->
+    <div class="panel p2">
+      <div class="slot" data-n="2">photo 2</div>
+      <img src="assets/bl-notinn2.jpeg" alt=""/>
+      <div class="panel-wash"></div>
+      <div class="panel-flare"></div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         PANEL 3 — tall right (1 col × 2 rows)
+    ═══════════════════════════════════════════════ -->
+    <div class="panel p3">
+      <div class="slot" data-n="3">photo 3</div>
+      <img src="assets/bl-notinn3.jpeg" alt=""/>
+      <div class="panel-wash"></div>
+      <div class="panel-flare"></div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         PANEL 4 — small center (has speed-line overlay)
+    ═══════════════════════════════════════════════ -->
+    <div class="panel p4">
+      <div class="slot" data-n="4">photo 4</div>
+      <img src="assets/bl-notinn4.jpeg" alt=""/>
+      <div class="panel-wash"></div>
+      <div class="panel-flare"></div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         PANEL 5 — tall bottom-left (1 col × 2 rows)
+    ═══════════════════════════════════════════════ -->
+    <div class="panel p5">
+      <div class="slot" data-n="5">photo 5</div>
+      <img src="assets/bl-notinn5.jpeg" alt=""/>
+      <div class="panel-wash"></div>
+      <div class="panel-flare"></div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         PANEL 6 — small bottom-center-left (screentone)
+    ═══════════════════════════════════════════════ -->
+    <div class="panel p6">
+      <div class="slot" data-n="6">photo 6</div>
+      <img src="assets/bl-notinn6.jpeg" alt=""/>
+      <div class="panel-wash"></div>
+      <div class="panel-flare"></div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         PANEL 7 — wide bottom-center (2 cols × 1 row)
+    ═══════════════════════════════════════════════ -->
+    <div class="panel p7">
+      <div class="slot" data-n="7">photo 7</div>
+      <img src="assets/bl-notinn7.jpeg" alt=""/>
+      <div class="panel-wash"></div>
+      <div class="panel-flare"></div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         PANEL 8 — small bottom-center-left (screentone)
+    ═══════════════════════════════════════════════ -->
+    <div class="panel p8">
+      <div class="slot" data-n="8">photo 8</div>
+      <img src="assets/bl-notinn8.jpg" alt=""/>
+      <div class="panel-wash"></div>
+      <div class="panel-flare"></div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         PANEL 9 — wide bottom-right (2 cols × 1 row)
+    ═══════════════════════════════════════════════ -->
+    <div class="panel p9">
+      <div class="slot" data-n="9">photo 9</div>
+      <img src="assets/bl-notinn9.png.webp" alt=""/>
+      <div class="panel-wash"></div>
+      <div class="panel-flare"></div>
+    </div>
+
+  </div>
+  <!-- screentone + vignette via ::before / ::after -->
+</div>
+
+</body>
+</html>

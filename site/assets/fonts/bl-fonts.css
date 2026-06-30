@@ -1,0 +1,29 @@
+/* Nanum Myeongjo + Noto Serif KR — subsetted — self-hosted */
+@font-face {
+  font-family: 'Nanum Myeongjo';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('nanum-myeongjo-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Nanum Myeongjo';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('nanum-myeongjo-700.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Noto Serif KR';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('noto-serif-kr-300.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Noto Serif KR';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('noto-serif-kr-400.woff2') format('woff2');
+}
