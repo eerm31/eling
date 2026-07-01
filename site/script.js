@@ -882,6 +882,7 @@
     let velX = 0, velY = 0;
     let rafId = null;
     let active = false;
+    let lastFlyTime = null;
 
     const applyPos = () => {
       figure.style.transform = `translate(${curX}px, ${curY}px)`;
@@ -894,9 +895,13 @@
       tgtY = M + Math.random() * (window.innerHeight - SPRITE - M * 2);
     };
 
-    // Velocity-based autonomous flight loop
-    const flyTick = () => {
+    // Velocity-based autonomous flight loop — delta-time normalised to 60 fps
+    const flyTick = (timestamp) => {
       if (!active) { rafId = null; return; }
+
+      // Clamp delta to [0, 3] frames so a tab-wake-up doesn't launch Mew off-screen
+      const delta = (lastFlyTime !== null) ? Math.min((timestamp - lastFlyTime) / 16.667, 3) : 1;
+      lastFlyTime = timestamp;
 
       const MAX_SPEED = 2.5;
       const ACCEL     = 0.13;
@@ -909,8 +914,8 @@
       if (dist < 25) pickTarget();
 
       if (dist > 0) {
-        velX += (dx / dist) * ACCEL;
-        velY += (dy / dist) * ACCEL;
+        velX += (dx / dist) * ACCEL * delta;
+        velY += (dy / dist) * ACCEL * delta;
       }
 
       const speed = Math.hypot(velX, velY);
@@ -919,11 +924,11 @@
         velY = (velY / speed) * MAX_SPEED;
       }
 
-      velX *= FRICTION;
-      velY *= FRICTION;
+      velX *= Math.pow(FRICTION, delta);
+      velY *= Math.pow(FRICTION, delta);
 
-      curX = clamp(curX + velX, 0, window.innerWidth  - SPRITE);
-      curY = clamp(curY + velY, 0, window.innerHeight - SPRITE);
+      curX = clamp(curX + velX * delta, 0, window.innerWidth  - SPRITE);
+      curY = clamp(curY + velY * delta, 0, window.innerHeight - SPRITE);
 
       // Flip sprite to face direction of travel
       if (Math.abs(velX) > 0.25) {
@@ -1002,9 +1007,10 @@
     document.addEventListener('mewReady', () => {
       if (active) return;
       active = true;
+      lastFlyTime = null;
       pickTarget();
       figure.classList.add('is-ready');
-      flyTick();
+      rafId = requestAnimationFrame(flyTick);
       scheduleMewBubble();
     });
 
@@ -1022,6 +1028,7 @@
           figure.classList.remove('is-ready', 'facing-left');
           if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
           velX = 0; velY = 0;
+          lastFlyTime = null;
         }
       });
       obs.observe(letterScene, { attributes: true, attributeFilter: ['class'] });
@@ -1187,6 +1194,7 @@
     let rafId   = null;
     let active  = false;
     let idleTimer = null;
+    let lastTickTime = null;
     let lerpSpeed = 0.007; // trail lag — lower = more delay
     let prevCursorX = 0; // track cursor direction for facing
     let walkCallback = null; // set when Gengar should walk to a target and tap on arrival
@@ -1222,11 +1230,15 @@
       speechBubble.style.transform = facing === -1 ? 'scaleX(-1)' : '';
     };
 
-    const tick = () => {
+    const tick = (timestamp) => {
       rafId = null;
       if (!active || state === 'tapping') return;
 
-      curX += (targetX - curX) * lerpSpeed;
+      // Normalise to 60 fps so high-refresh-rate screens don't accelerate Gengar
+      const delta = (lastTickTime !== null) ? Math.min((timestamp - lastTickTime) / 16.667, 3) : 1;
+      lastTickTime = timestamp;
+
+      curX += (targetX - curX) * lerpSpeed * delta;
 
       // Walk vs idle detection
       const spd = Math.abs(curX - prevX);
@@ -1397,6 +1409,7 @@
           prevCursorX = 0;
           facing    = -1;
           fixedY    = computeFixedY();
+          lastTickTime = null;
           speechBubble.classList.remove('is-visible');
           setMotionClass('gengar-idle');
           startTick();
@@ -1407,6 +1420,7 @@
           state         = 'idle';
           speechBubble.classList.remove('is-visible');
           lerpSpeed = 0.007;
+          lastTickTime = null;
           if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
         }
       });
