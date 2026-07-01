@@ -1615,16 +1615,15 @@
     };
     const throbSync = createThrobSync();
 
-    // Physical sizing: same spec as letter-scene ghost (10.6 cm start, 15.5–17 cm max),
-    // clamped to 62% / 92% of window.innerHeight so it fits any window size.
-    const VH = window.innerHeight;
+    // Physical sizing: same spec as letter-scene ghost (10.6 cm start, 15.5–17 cm max).
+    // Sizes are exact physical measurements — no viewport clamping.
     const _psH = 10.6 * _physPX.CM, _psW = 1.0 * _physPX.IN;
     const _ptH = (15.5 + Math.random() * 1.5) * _physPX.CM;
     const _ptW = ( 1.8 + Math.random() * 0.4) * _physPX.IN;
-    const START_H  = Math.round(Math.min(_psH, VH * 0.62));
-    const START_W  = Math.round(_psW * (START_H / _psH));
-    const TARGET_H = Math.round(Math.min(_ptH, VH * 0.92));
-    const TARGET_W = Math.round(_ptW * (TARGET_H / _ptH));
+    const START_H  = Math.round(_psH);
+    const START_W  = Math.round(_psW);
+    const TARGET_H = Math.round(_ptH);
+    const TARGET_W = Math.round(_ptW);
     const DIST_NEEDED = 3000;
     let curH = START_H, curW = START_W, rubDist = 0, grown = false;
     let returning = false, holdTimer = null, returnRaf = null;
